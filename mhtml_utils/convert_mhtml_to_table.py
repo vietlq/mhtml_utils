@@ -5,7 +5,7 @@ from datetime import datetime
 import pkgutil
 import os
 
-from .convert_mhtml_to_html import get_utf8_content_of_mht
+from .convert_mhtml_to_html import get_utf8_content_of_mht, _STR_UTF8
 from .convert_mhtml_to_pandas import dataframe_from_content
 
 # https://datatables.net/examples/data_sources/js_array.html
@@ -26,10 +26,14 @@ HTML_TEMPLATE = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN
 <head>
     <title>Sortable</title>
     <meta charset="UTF-8">
+    <!--
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css"
           href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+    -->
+    <style>%(style)s</style>
+    <script>%(script)s</script>
 </head>
 
 <body>
@@ -79,11 +83,20 @@ def main():
 
     os.makedirs(html_dir, exist_ok=True)
     with open(html_file_name, "wb") as html_fh:
-        contents = HTML_TEMPLATE % dict({"json_values": json_values})
-        html_fh.write(contents.encode("utf-8"))
+        script_str = pkgutil.get_data(__name__, "DataTables/datatables.min.js")
+        style_str = pkgutil.get_data(__name__, "DataTables/datatables.min.css")
+        contents = HTML_TEMPLATE % dict(
+            {
+                "script": script_str.decode(_STR_UTF8),
+                "style": style_str.decode(_STR_UTF8),
+                "json_values": json_values,
+            }
+        )
+        html_fh.write(contents.encode(_STR_UTF8))
+
+    print(f"Check the output file: {html_file_name}")
 
 
 if __name__ == "__main__":
     # Run: python3 -m mhtml_utils.convert_mhtml_to_table
     main()
-    #print(pkgutil.get_data(__name__, "DataTables/datatables.min.js")[:100])

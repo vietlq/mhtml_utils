@@ -16,6 +16,8 @@ def main():
             result_df = dataframe_from_content(result.raw)
             result_df.to_excel(writer, sheet_name=result.orig_key)
 
+    print(f"Check the output file: {excel_file_name}")
+
 
 if __name__ == "__main__":
     # Run: python3 -m mhtml_utils.convert_mhtml_to_excel
