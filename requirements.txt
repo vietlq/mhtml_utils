@@ -20,7 +20,7 @@ bitarray==1.0.1
 bitmerchant==0.1.8
 bkcharts==0.2
 blaze==0.11.3
-bleach==2.0.0
+bleach==3.1.4
 blockstack==20.0.8.6
 blockstack-zones==0.19.0.0
 bokeh==0.12.10
