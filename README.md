@@ -1,4 +1,6 @@
-# Convert MHT(ML) to HTML
+# Utilities for parsing and extracting MHTML files
+
+## Convert MHT(ML) to HTML
 
 MS OneNote, Safari, MS Word, etc. can export rich documents with images to a single MIME multi-part file with extension MHT/MHTML.
 
