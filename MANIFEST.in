@@ -1,0 +1,2 @@
+include mhtml_utils/DataTables/datatables.min.css
+include mhtml_utils/DataTables/datatables.min.js
