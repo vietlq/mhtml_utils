@@ -82,7 +82,8 @@ def handle_multipart(mht_file, export_utf8_mht=False):
                     yield handle_non_multipart(filename, new_dirname, payload)
     except Exception as e:
         logger.exception(
-            f"An error occurred during detection, decoding, or encoding of the file {mht_file}: {str(e)}!"
+            f"An error occurred during detection, decoding, "
+            f"or encoding of the file {mht_file}: {str(e)}!"
         )
 
 
