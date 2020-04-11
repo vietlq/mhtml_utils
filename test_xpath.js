@@ -3,10 +3,12 @@
 // https://stackoverflow.com/questions/614797/xpath-find-a-node-that-has-a-given-attribute-whose-value-contains-a-string
 // https://stackoverflow.com/questions/103325/what-is-the-correct-xpath-for-choosing-attributes-that-contain-foo
 
-let iterator = document.evaluate('//li/span[contains(text(), " v ")]', document);
-let thisNode = iterator.iterateNext();
+let img_iterator = document.evaluate('//img[contains(@alt, " v ")]', document);
+let li_iterator = document.evaluate('//li[./span[contains(text(), " v ")]]', document);
+let span_iterator = document.evaluate('//li/span[contains(text(), " v ")]', document);
+let thisNode = span_iterator.iterateNext();
 
 while (thisNode) {
     console.log(thisNode.innerText);
-    thisNode = iterator.iterateNext();
+    thisNode = span_iterator.iterateNext();
 }

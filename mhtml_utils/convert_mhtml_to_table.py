@@ -16,6 +16,7 @@ from .convert_mhtml_to_pandas import dataframe_from_content
 # https://www.jqueryscript.net/table/Paginate-Sort-Filter-Table-Sortable.html
 # https://stackoverflow.com/questions/6028000/how-to-read-a-static-file-from-inside-a-python-package
 # https://pandas.pydata.org/pandas-docs/stable/reference/api/pandas.DataFrame.to_json.html
+# https://mdbootstrap.com/docs/jquery/tables/sort/
 
 
 HTML_TEMPLATE = """<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
