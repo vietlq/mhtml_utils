@@ -58,7 +58,7 @@ distributed==1.19.1
 Django==1.11
 doc8==0.8.0
 docutils==0.14
-ecdsa==0.13
+ecdsa==0.13.3
 entrypoints==0.2.3
 enum34==1.1.6
 et-xmlfile==1.0.1
