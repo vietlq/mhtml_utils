@@ -55,7 +55,7 @@ datashape==0.5.4
 decorator==4.1.2
 defusedxml==0.5.0
 distributed==1.19.1
-Django==1.11
+Django==1.11.28
 doc8==0.8.0
 docutils==0.14
 ecdsa==0.13
