@@ -46,19 +46,22 @@ def extract_li_and_spans_with_v(top_elem):
     return pd.DataFrame(data=output, columns=["case_name", "details"])
 
 
+def dataframe_from_content(raw_content):
+    soup = BeautifulSoup(raw_content, "html5lib")
+    # Export a valid and prettified HTML document
+    html = soup.prettify()
+    doc = parsel.Selector(text=html)
+    return extract_li_and_spans_with_v(doc)
+
+
 def main():
     suffix = datetime.now().strftime("%Y%m%d_%H%M%S")
     excel_file_name = f"results_{suffix}.xlsx"
 
     with pd.ExcelWriter(excel_file_name) as writer:
         for result in get_utf8_content_of_mht():
-            sheet_name = result.orig_key
-            soup = BeautifulSoup(result.raw, "html5lib")
-            # Export a valid and prettified HTML document
-            html = soup.prettify()
-            doc = parsel.Selector(text=html)
-            result_df = extract_li_and_spans_with_v(doc)
-            result_df.to_excel(writer, sheet_name=sheet_name)
+            result_df = dataframe_from_content(result.raw)
+            result_df.to_excel(writer, sheet_name=result.orig_key)
 
 
 if __name__ == "__main__":
