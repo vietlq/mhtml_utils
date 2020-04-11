@@ -1,4 +1,6 @@
-# Utilities for parsing and extracting MHTML files
+# mhtml_utils
+
+Utilities for parsing and extracting MHTML files.
 
 ## Convert MHT(ML) to HTML
 
