@@ -3,8 +3,8 @@
 import pandas as pd
 from datetime import datetime
 
-from .convert_mhtml_to_html import get_utf8_content_of_mht
-from .convert_mhtml_to_pandas import dataframe_from_content
+from .to_stream import get_utf8_content_of_mht
+from .to_pandas import dataframe_from_content
 
 
 def main():

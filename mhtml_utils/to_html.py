@@ -5,8 +5,8 @@ from datetime import datetime
 import pkgutil
 import os
 
-from .convert_mhtml_to_html import get_utf8_content_of_mht, _STR_UTF8
-from .convert_mhtml_to_pandas import dataframe_from_content
+from .to_stream import get_utf8_content_of_mht, _STR_UTF8
+from .to_pandas import dataframe_from_content
 
 # https://datatables.net/examples/data_sources/js_array.html
 # https://datatables.net/download/index
@@ -99,5 +99,5 @@ def main():
 
 
 if __name__ == "__main__":
-    # Run: python3 -m mhtml_utils.convert_mhtml_to_table
+    # Run: python3 -m mhtml_utils.to_html
     main()
