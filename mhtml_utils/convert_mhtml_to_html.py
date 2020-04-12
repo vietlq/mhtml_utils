@@ -121,6 +121,7 @@ def get_utf8_content_of_mht() -> Generator[ParseResult, None, None]:
     ]
     logger.info(f"List of MHT/MHTML files in this folder: {mht_files}")
 
+    # TODO: Simplify the loops around yield
     results = (handle_multipart(mht_file) for mht_file in mht_files)
     for sub_results in results:
         for sub_sub_sub_results in sub_results:
