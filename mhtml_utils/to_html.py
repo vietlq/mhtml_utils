@@ -4,9 +4,13 @@ import pandas as pd
 from datetime import datetime
 import pkgutil
 import os
+import logging
 
 from .to_stream import get_utf8_content_of_mht, _STR_UTF8
 from .to_pandas import dataframe_from_content
+
+logging.basicConfig(level=os.environ.get("LOGLEVEL", "INFO"))
+logger = logging.getLogger("mht2html")
 
 # https://datatables.net/examples/data_sources/js_array.html
 # https://datatables.net/download/index
@@ -70,13 +74,19 @@ $(document).ready(function() {
 def main():
     suffix = datetime.now().strftime("%Y%m%d_%H%M%S")
     html_dir = f"html_results_{suffix}"
-    html_file_name = os.path.join(html_dir, "index.html")
+    # TODO: Consider using index.html when exporting images
+    html_file_name = os.path.join(html_dir, f"results_{suffix}.html")
     dataframes = []
+    bad_cases = []
 
     for result in get_utf8_content_of_mht():
-        result_df = dataframe_from_content(result.raw)
-        result_df["source"] = result.orig_key
-        dataframes.append(result_df)
+        try:
+            result_df = dataframe_from_content(result.raw)
+            result_df["source"] = result.orig_key
+            dataframes.append(result_df)
+        except:
+            bad_cases.append(result.target_file)
+            logger.exception(f"An error occurred when processing {result.target_file}")
 
     final_df = pd.concat(dataframes)
     final_df = final_df.loc[:, ["source", "case_name", "details"]]
@@ -95,6 +105,7 @@ def main():
         )
         html_fh.write(contents.encode(_STR_UTF8))
 
+    print(f"Could not process these files: {bad_cases}")
     print(f"Check the output file: {html_file_name}")
 
 
