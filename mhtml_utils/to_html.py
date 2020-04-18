@@ -5,6 +5,7 @@ from datetime import datetime
 import pkgutil
 import os
 import logging
+import json
 
 from .to_stream import get_utf8_content_of_mht, _STR_UTF8
 from .to_pandas import dataframe_from_content
@@ -90,7 +91,8 @@ def main():
 
     final_df = pd.concat(dataframes)
     final_df = final_df.loc[:, ["source", "case_name", "details"]]
-    json_values = final_df.to_json(orient="values")
+    json_values = json.loads(final_df.to_json(orient="values"))
+    json_values = json.dumps(json_values, indent=2)
 
     os.makedirs(html_dir, exist_ok=True)
     with open(html_file_name, "wb") as html_fh:

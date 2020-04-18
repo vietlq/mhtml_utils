@@ -20,12 +20,13 @@ def main():
 
     with pd.ExcelWriter(excel_file_name) as writer:
         for result in get_utf8_content_of_mht():
-            try:
-                result_df = dataframe_from_content(result.raw)
-                result_df.to_excel(writer, sheet_name=result.orig_key)
-            except:
-                bad_cases.append(result.target_file)
-                logger.exception(f"An error occurred when processing {result.target_file}")
+            if result.target_file.endswith(".htm") or result.target_file.endswith(".html"):
+                try:
+                    result_df = dataframe_from_content(result.raw)
+                    result_df.to_excel(writer, sheet_name=result.orig_key)
+                except:
+                    bad_cases.append(result.target_file)
+                    logger.exception(f"An error occurred when processing {result.target_file}")
 
     print(f"Could not process these files: {bad_cases}")
     print(f"Check the output file: {excel_file_name}")
