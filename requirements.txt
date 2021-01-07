@@ -41,7 +41,7 @@ jupyter==1.0.0
 jupyter-client==6.1.2
 jupyter-console==6.1.0
 jupyter-core==4.6.3
-lxml==4.5.0
+lxml==4.6.2
 MarkupSafe==1.1.1
 mccabe==0.6.1
 -e git+git@github.com:vietlq/mhtml_utils.git@3d5935e67f0916167b22c1b223c06a94bb7ad5c5#egg=mhtml_utils
